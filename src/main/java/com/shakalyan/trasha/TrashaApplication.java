@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TrashaApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TrashaApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TrashaApplication.class, args);
+    }
 
 }
