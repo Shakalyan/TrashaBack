@@ -36,8 +36,8 @@ public class DictionariesController {
     @DeleteMapping
     public ResponseEntity<String> createNewDictionary(@RequestHeader("Authorization") String token,
                                                       @RequestParam("id") Integer dictionaryId) {
-        authenticationService.authenticate(token);
-        return dictionaryService.deleteDictionary(dictionaryId);
+        Integer userId = authenticationService.authenticate(token);
+        return dictionaryService.deleteDictionary(userId, dictionaryId);
     }
 
 }
