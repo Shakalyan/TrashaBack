@@ -1,14 +1,13 @@
 package com.shakalyan.trasha.controller;
 
+import com.shakalyan.trasha.dto.NewDictionaryRequest;
 import com.shakalyan.trasha.model.Dictionary;
 import com.shakalyan.trasha.repository.DictionaryRepo;
 import com.shakalyan.trasha.service.AuthenticationService;
+import com.shakalyan.trasha.service.DictionaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +17,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DictionariesController {
 
-    private final DictionaryRepo dictionaryRepo;
+    private final DictionaryService dictionaryService;
     private final AuthenticationService authenticationService;
 
     @GetMapping
     public ResponseEntity<List<Dictionary>> getUserDictionaries(@RequestHeader("Authorization") String token) {
         Integer userId = authenticationService.authenticate(token);
-        List<Dictionary> response = new ArrayList<>(dictionaryRepo.findByUserId(userId));
-        return ResponseEntity.ok(response);
+        return dictionaryService.getUserDictionaries(userId);
+    }
+
+    @PostMapping
+    public ResponseEntity<Dictionary> createNewDictionary(  @RequestHeader("Authorization") String token,
+                                                            @RequestBody NewDictionaryRequest request) {
+        Integer userId = authenticationService.authenticate(token);
+        return dictionaryService.createNewDictionary(userId, request.getName());
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> createNewDictionary(@RequestHeader("Authorization") String token,
+                                                      @RequestParam("id") Integer dictionaryId) {
+        authenticationService.authenticate(token);
+        return dictionaryService.deleteDictionary(dictionaryId);
     }
 
 }
