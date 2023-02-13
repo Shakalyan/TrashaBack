@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewDictionaryRequest {
+public class AddTranslationRequest {
 
-    private String name;
+    private Integer dictionaryId;
 
-    private String source;
+    private String word;
 
-    private String target;
+    private String translation;
 
 }

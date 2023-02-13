@@ -30,7 +30,7 @@ public class DictionariesController {
     public ResponseEntity<Dictionary> createNewDictionary(  @RequestHeader("Authorization") String token,
                                                             @RequestBody NewDictionaryRequest request) {
         Integer userId = authenticationService.authenticate(token);
-        return dictionaryService.createNewDictionary(userId, request.getName());
+        return dictionaryService.createNewDictionary(userId, request);
     }
 
     @DeleteMapping

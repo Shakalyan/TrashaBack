@@ -20,4 +20,8 @@ public class Dictionary {
 
     private Integer userId;
 
+    private String source;
+
+    private String target;
+
 }

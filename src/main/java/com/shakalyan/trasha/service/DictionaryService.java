@@ -1,5 +1,6 @@
 package com.shakalyan.trasha.service;
 
+import com.shakalyan.trasha.dto.NewDictionaryRequest;
 import com.shakalyan.trasha.model.Dictionary;
 import com.shakalyan.trasha.repository.DictionaryRepo;
 import com.shakalyan.trasha.repository.TranslationRepo;
@@ -25,8 +26,12 @@ public class DictionaryService {
         return ResponseEntity.ok(new ArrayList<>(dictionaryRepo.findByUserId(userId)));
     }
 
-    public ResponseEntity<Dictionary> createNewDictionary(Integer userId, String name) {
-        Dictionary dictionary = dictionaryRepo.save(new Dictionary(0, name, userId));
+    public ResponseEntity<Dictionary> createNewDictionary(Integer userId, NewDictionaryRequest request) {
+        Dictionary dictionary = dictionaryRepo.save(new Dictionary( 0,
+                                                                    request.getName(),
+                                                                    userId,
+                                                                    request.getSource(),
+                                                                    request.getTarget()));
         return ResponseEntity.ok(dictionary);
     }
 
