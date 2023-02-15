@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="dictionaries")
+@Table(name="dictionaries", schema="public")
 public class Dictionary {
 
     @Id

@@ -20,7 +20,7 @@ public class TranslateController {
     @PostMapping
     public ResponseEntity<TranslateResponse> translate( @RequestHeader("Authorization") String token,
                                                         @RequestBody TranslateRequest request) {
-        authenticationService.authenticate(token);
+        authenticationService.getUserIdByToken(token);
         return translateService.translate(request);
     }
 
