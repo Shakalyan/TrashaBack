@@ -13,13 +13,13 @@ import java.io.InputStreamReader;
 @Service
 public class TranslateService {
 
-    private final String directory = "/home/shakalyan/IdeaProjects/FullTrasha";
+    private final String directory = System.getenv("TS_DIRECTORY");
     private final String filename = "translation_service.py";
 
     public ResponseEntity<TranslateResponse> translate(TranslateRequest request) {
 
         ProcessBuilder processBuilder = new ProcessBuilder();
-
+        System.out.println(directory);
         processBuilder.directory(new File(directory));
         processBuilder.command("python3", filename, request.getSource(), request.getTarget(), request.getText());
 
